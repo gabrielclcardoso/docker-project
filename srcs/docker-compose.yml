@@ -1,8 +1,24 @@
 services:
-  nginx:
-    image: nginx
-    build: ./requirements/nginx
-    ports:
-      - "80:80"
-      - "443:443"
-
+  #  nginx:
+  #    image: nginx
+  #    build: ./requirements/nginx
+  #    ports:
+  #      - "80:80"
+  #      - "443:443"
+  mariadb:
+    image: mariadb
+    build: ./requirements/mariadb
+    env_file: .env
+    volumes:
+      - DB:/database
+    networks:
+      - mynetwork
+volumes:
+  DB:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/gcorreia/data/DB/
+networks:
+  mynetwork:
