@@ -5,6 +5,10 @@ events {}
 http {
 	include mime.types;
 
+	upstream php {
+		server	wordpress:9000;
+	}
+
 	#Redirect traffic from port 80 to port 443
 	server {
 		listen 80;
@@ -20,20 +24,11 @@ http {
 		ssl_protocols TLSv1.3 TLSv1.2;
 
 		location / {
-			root /www/wordpress;
+			root /www/wordpress
 		}
 		location \.php$ {
-			try_files $fastcgi_script_name =404;
-
-			include fastcgi_params;
-
-			fastcgi_pass		wordpress:9000;
-			fastcgi_index		index.php;
-			fastcgi_buffers		8 16k;
-			fastcgi_buffer_size	32k;
-
-			fastcgi_param DOCUMENT_ROOT	$realpath_root;
-			fastcgi_param SCRIPT_FILENAME	$realpath_root$fastcgi_script_name;
+			proxy_pass https://php;
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
 		}
-	}
 }

@@ -1,10 +1,4 @@
 services:
-  #  nginx:
-  #    image: nginx
-  #    build: ./requirements/nginx
-  #    ports:
-  #      - "80:80"
-  #      - "443:443"
   mariadb:
     image: mariadb
     build: ./requirements/mariadb
@@ -13,6 +7,32 @@ services:
       - DB:/database
     networks:
       - mynetwork
+    expose:
+      - "3306"
+  wordpress:
+    image: wordpress
+    build: ./requirements/wordpress
+    env_file: .env
+    volumes:
+      - wordpress_files:/www
+    networks:
+      - mynetwork
+    expose:
+      - "9000"
+      - "3306"
+  nginx:
+    image: nginx
+    build: ./requirements/nginx
+    env_file: .env
+    volumes:
+      - wordpress_files:/www
+    networks:
+      - mynetwork
+    expose:
+      - "9000"
+    ports:
+      - "80:80"
+      - "443:443"
 volumes:
   DB:
     driver: local
@@ -20,5 +40,11 @@ volumes:
       type: none
       o: bind
       device: /home/gcorreia/data/DB/
+  wordpress_files:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/gcorreia/data/wordpress_files/
 networks:
   mynetwork:
