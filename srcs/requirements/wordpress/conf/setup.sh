@@ -14,5 +14,4 @@ then
 	sed -i "s/localhost/localhost:3306/g" wp-config.php
 fi
 
-#echo "listen nginx:9000" >> /etc/php8/php-fpm.conf
 exec php-fpm8 -F
