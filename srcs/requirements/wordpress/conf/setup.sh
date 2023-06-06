@@ -9,9 +9,9 @@ then
 	cd www/wordpress
 	mv wp-config-sample.php wp-config.php
 	sed -i "s/database_name_here/$DB_NAME/g" wp-config.php
-	sed -i "s/username_here/$MYSQL_USR/g" wp-config.php
-	sed -i "s/password_here/$MYSQL_PASSWD/g" wp-config.php
-	sed -i "s/localhost/localhost:3306/g" wp-config.php
+	sed -i "s/username_here/$MARIADB_USR/g" wp-config.php
+	sed -i "s/password_here/$MARIADB_PASSWD/g" wp-config.php
+	sed -i "s/localhost/$DB_HOST:3306/g" wp-config.php
 fi
 
 exec php-fpm8 -F

@@ -8,23 +8,22 @@ then
 	#secure installaiton
 mariadb-secure-installation << END
 
-
-	y
-	$MYSQL_ROOT_PASSWD
-	$MYSQL_ROOT_PASSWD
-	y
-	y
-	y
-	y
+y
+y
+$MARIADB_ROOT_PASSWD
+$MARIADB_ROOT_PASSWD
+y
+n
+y
+y
 END
 
 	#Create user
-	mysql -e "CREATE DATABASE $DB_NAME;CREATE USER $MYSQL_USR@localhost \
-		IDENTIFIED BY '$MYSQL_PASSWD';GRANT ALL PRIVILEGES ON $DB_NAME.* TO \
-		$MYSQL_USR@localhost;FLUSH PRIVILEGES;"
+	mysql -e "CREATE DATABASE $DB_NAME;CREATE USER $MARIADB_USR@'%'\
+		IDENTIFIED BY '$MARIADB_PASSWD';GRANT ALL PRIVILEGES ON $DB_NAME.* TO \
+		$MARIADB_USR@'%';FLUSH PRIVILEGES;"
 
 	mysqladmin -u root shutdown #shutdown server
 fi
 
 exec mysqld_safe --datadir=/database
-#exec sleep infinity
