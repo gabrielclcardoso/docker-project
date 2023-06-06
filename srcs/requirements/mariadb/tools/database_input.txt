@@ -1,5 +1,0 @@
-CREATE DATABASE wordpressDB;
-CREATE USER sauron@localhost IDENTIFIED BY 'mordor';
-GRANT ALL PRIVILEGES ON wordpressDB.* TO sauron@localhost;
-FLUSH PRIVILEGES;
-

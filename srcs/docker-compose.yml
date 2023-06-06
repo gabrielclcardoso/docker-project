@@ -6,7 +6,7 @@ services:
     volumes:
       - DB:/database
     networks:
-      - mynetwork
+      - inception-network
   wordpress:
     image: wordpress
     build: ./requirements/wordpress
@@ -14,7 +14,7 @@ services:
     volumes:
       - wordpress_files:/www
     networks:
-      - mynetwork
+      - inception-network
   nginx:
     image: nginx
     build: ./requirements/nginx
@@ -22,7 +22,7 @@ services:
     volumes:
       - wordpress_files:/www
     networks:
-      - mynetwork
+      - inception-network
     ports:
       - "443:443"
 volumes:
@@ -39,4 +39,5 @@ volumes:
       o: bind
       device: /home/gcorreia/data/wordpress_files/
 networks:
-  mynetwork:
+  inception-network:
+    name: inception-network

@@ -5,7 +5,7 @@ then
 	mysqld_safe --datadir=/database & #start server
 	sleep 1 #wait until server is up and running
 
-	#secure installaiton
+#secure installaiton
 mariadb-secure-installation << END
 
 y

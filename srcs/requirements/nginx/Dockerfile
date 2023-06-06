@@ -5,7 +5,6 @@ RUN apk add --no-cache openssl
 
 RUN mkdir -p /etc/nginx
 COPY ./conf/nginx.conf /etc/nginx/
-COPY ./conf/setup.sh  /
+COPY ./tools/setup.sh  /
 
 ENTRYPOINT ["/setup.sh"]
-#ENTRYPOINT ["sleep", "infinitty"]

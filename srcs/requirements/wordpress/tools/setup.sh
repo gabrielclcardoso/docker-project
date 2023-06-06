@@ -6,6 +6,7 @@ then
 	if [ $? != 0 ]
 	then
 		rmdir /www/wordpress
+		exit 0
 	fi
 	cd www/wordpress
 	mv wp-config-sample.php wp-config.php
