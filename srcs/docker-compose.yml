@@ -7,6 +7,7 @@ services:
       - DB:/database
     networks:
       - inception-network
+    restart: on-failure
   wordpress:
     image: wordpress
     build: ./requirements/wordpress
@@ -15,6 +16,7 @@ services:
       - wordpress_files:/www
     networks:
       - inception-network
+    restart: on-failure
   nginx:
     image: nginx
     build: ./requirements/nginx
@@ -25,6 +27,7 @@ services:
       - inception-network
     ports:
       - "443:443"
+    restart: on-failure
 volumes:
   DB:
     driver: local
