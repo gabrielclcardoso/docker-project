@@ -1,6 +1,7 @@
 all: kill build
 
 build: 
+	cd srcs && docker compose build
 	cd srcs && docker compose up -d
 
 kill:
